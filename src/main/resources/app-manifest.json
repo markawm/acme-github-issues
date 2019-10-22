@@ -1,0 +1,37 @@
+{
+  "name": "Michael Demo SDM Example App",
+  "url": "http://example.test",
+  "private": false,
+  "publicKeys": [
+    "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE6PbTwaY/hnn+0LIFbbk1znXvN4UP\nb+bH0ilhiQvpmcKZeTkZmJVj7grdbQDP2FxqoQtfIueUPu696t4G55KDYA==\n-----END PUBLIC KEY-----"
+  ],
+  "extensions" : {
+    "cb.sdm.Report" : {
+      "github.RepositoriesSimple": {
+        "type" : "graphql",
+        "title" : "GitHub Repositories",
+        "filter_fields" : ["name"],
+        "graphql_query" : "query { githubRepositories(first: 10) { nodes {id, name, url} }}",
+        "report_rows_path" : "githubRepositories.nodes",
+        "col_spec" : {
+          "id" : {
+            "value": "id"
+          },
+          "name" : {
+            "value" : "name",
+            "url" : "url"
+          }
+        },
+        "visualizer" : {
+          "columns" : [
+            {
+              "display_name" : "Name",
+              "column_id" : "name",
+              "renderer" : "linked_value"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
