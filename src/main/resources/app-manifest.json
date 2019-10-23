@@ -8,7 +8,7 @@
   "extensions" : {
     "cb.sdm.DataType" : {
       "github_issues" : {
-        "schema" : "type GitHubIssue @queryable(key: \"github_issues\") { id: ID!, closed: Boolean!, number: Int!, repository: GithubRepository @relationship(matches: [{source: \"repositoryId\", target: \"repositoryId\"}]), repositoryId: String! @field(path:\"@.repository.id\"), title: String!, url: Url! } extend type GithubRepository { issues: [GitHubIssue] @relationship(matches: [{source: \"repositoryId\", target: \"repositoryId\"}], cascadeDelete: true)}"
+        "schema" : "enum GitHubIssueState { OPEN, CLOSED } type GitHubIssue @queryable(key: \"github_issues\") { id: ID!, issueId: String @field(path:\"@.id\"), state: GitHubIssueState!, number: Int!, repository: GithubRepository @relationship(matches: [{source: \"repositoryId\", target: \"repositoryId\"}]), repositoryId: String! @field(path:\"@.repository.nodeId\"), title: String!, body: String!, url: Url!, updatedAt: DateTime!, publishedAt: DateTime } extend type GithubRepository { issues: [GitHubIssue] @relationship(matches: [{source: \"repositoryId\", target: \"repositoryId\"}], cascadeDelete: true)}"
       }
     }
   }
