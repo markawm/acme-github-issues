@@ -1,0 +1,23 @@
+version: '2.3'
+
+networks:
+  public:
+    driver: bridge
+    internal: false
+
+services:
+  postgres:
+    build: ./developer-env/postgres
+    scale: 1
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: on-failure
+    mem_limit: 512m
+    networks:
+      public: {}
+
+volumes:
+  postgres_data:
+    driver: local
