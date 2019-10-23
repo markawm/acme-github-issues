@@ -37,9 +37,9 @@ public class ApiManager {
         appTokens = new AppTokens(sdmApiUrl, privateKeyValue, appId);
     }
 
-    String createToken() {
+    String createToken(String account) {
         try {
-            return appTokens.getAccountAccessToken("acme-issues");
+            return appTokens.getAccountAccessToken(account);
         } catch (IOException e) {
             LOGGER.error("Error getting token", e);
         }

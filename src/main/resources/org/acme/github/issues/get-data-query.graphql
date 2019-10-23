@@ -1,0 +1,7 @@
+query getGithubIssue($key:String!) {
+    gitHubIssues(where:{key:$key}) {
+        nodes {
+            id
+        }
+    }
+}

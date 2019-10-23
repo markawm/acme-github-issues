@@ -1,0 +1,9 @@
+query getConfig($appId:String!) {
+    configs(where:{filter:{eq:{path:"appId", value:$appId}}}) {
+        nodes {
+            config
+            appId
+            account
+        }
+    }
+}
