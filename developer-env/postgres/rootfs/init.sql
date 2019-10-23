@@ -1,0 +1,7 @@
+-- CREATE TABLE sor_data_github_repositories (
+--     account varchar(40),
+--     key character varying(2048),
+--     ts timestamp with time zone,
+--     data jsonb,
+--     CONSTRAINT sor_data_github_repositories_pk PRIMARY KEY (account, key)
+-- );
