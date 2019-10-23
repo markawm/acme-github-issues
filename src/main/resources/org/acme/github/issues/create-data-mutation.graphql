@@ -1,0 +1,9 @@
+mutation addData($key: String!, $data: JsonObject!) {
+    data(type: "github_issues") {
+        add(input: {key: $key, data: $data}) {
+            data {
+                id
+            }
+        }
+    }
+}

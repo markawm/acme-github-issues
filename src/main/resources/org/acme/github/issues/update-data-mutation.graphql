@@ -1,0 +1,9 @@
+mutation updateData($id: ID!, $data: Json!) {
+    data(type: "github_issues") {
+        update(input: {id: $id, data: $data}) {
+            data {
+                id
+            }
+        }
+    }
+}
