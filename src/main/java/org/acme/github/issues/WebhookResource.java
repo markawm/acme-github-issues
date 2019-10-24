@@ -43,10 +43,13 @@ public class WebhookResource {
     @POST
     public void onWebhook(@HeaderParam("X-GitHub-Event") String eventType, JsonObject payload) {
         Integer installationId = payload.getJsonObject("installation").getJsonNumber("id").intValue();
-        lookupAccount(installationId).ifPresent(account -> {
-            executeCreate(payload, account);
-            LOGGER.info("Injecting webhook event for account {}", account);
-        });
+        Optional<String> account = lookupAccount(installationId);
+        if (account.isPresent()) {
+            executeCreate(payload, account.get());
+            LOGGER.info("Injecting webhook event for account {}", account.get());
+        } else {
+            LOGGER.error("No account found for installationId {}", installationId);
+        }
     }
 
     private void executeCreate(JsonObject payload, String account) {
