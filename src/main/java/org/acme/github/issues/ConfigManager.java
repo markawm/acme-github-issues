@@ -4,7 +4,10 @@ import io.quarkus.runtime.StartupEvent;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import javax.enterprise.context.ApplicationScoped;
@@ -38,9 +41,9 @@ public class ConfigManager {
     ApiManager apiManager;
 
     private JsonObject configQuery;
-    private Map<String, AppConfig> installations;
+    private Map<String, List<AppConfig>> installations;
 
-    public Map<String, AppConfig> getInstallations() {
+    public Map<String, List<AppConfig>> getInstallations() {
         if (installations == null) {
             SDMAuth auth = new SDMAuth(apiManager.createToken("acme-issues"));
             JsonObject response = sdmApiClient.executeQuery("acme-issues", auth, getConfigQuery());
@@ -50,15 +53,22 @@ public class ConfigManager {
                 return Collections.emptyMap();
             }
 
-            installations = response.getJsonObject("data").getJsonObject("configs").getJsonArray("nodes")
+            installations = new HashMap();
+            response.getJsonObject("data").getJsonObject("configs").getJsonArray("nodes")
                     .stream()
                     .map(JsonValue::asJsonObject)
-                    .collect(Collectors.toMap(
-                            e -> e.getString("account"),
-                            e -> new AppConfig(e.getJsonObject("config"))
-                    ));
-        }
+                    .forEach( e-> {
+                        String accountName = e.getString("account");
+                        List<AppConfig> ghAccounts = new ArrayList<>();
+                        e.getJsonObject("config").getJsonArray("githubAccounts").stream()
+                         .map(JsonValue::asJsonObject)
+                         .forEach( en -> {
+                                       ghAccounts.add(new AppConfig(en));
+                                   });
+                        installations.put(accountName, ghAccounts);
+                    });
 
+        }
         return installations;
     }
 

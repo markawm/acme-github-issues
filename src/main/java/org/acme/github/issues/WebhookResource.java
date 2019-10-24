@@ -3,6 +3,7 @@ package org.acme.github.issues;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import javax.inject.Inject;
@@ -132,9 +133,11 @@ public class WebhookResource {
     }
 
     private Optional<String> lookupAccount(Integer installationId) {
-        Map<String, AppConfig> installations = configManager.getInstallations();
-        return installations.entrySet().stream()
-                .filter(e -> e.getValue().getInstallationId().equals(installationId))
+        Map<String, List<AppConfig>> installations = configManager.getInstallations();
+
+        return installations.entrySet()
+                .stream()
+                .filter(e -> e.getValue().stream().anyMatch(appConfig -> appConfig.getInstallationId().equals(installationId)))
                 .findFirst()
                 .map(Map.Entry::getKey);
     }

@@ -12,7 +12,7 @@ public class AppConfig {
     }
 
     public AppConfig(JsonObject config) {
-        this.githubAccount = config.getString("githubAccount");
+        this.githubAccount = config.getString("account");
         this.installationId = config.getJsonNumber("installationId").intValue();
     }
 
