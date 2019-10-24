@@ -28,6 +28,7 @@ public class GitHubIssueMapper {
         return Json.createObjectBuilder()
                 .add("id", issue.getJsonNumber("id"))
                 .add("nodeId", issue.getString("node_id"))
+                .add("url", issue.getString("url"))
                 .add("repository", Json.createObjectBuilder()
                     .add("id", repository.getJsonNumber("id"))
                     .add("nodeId", repository.getString("node_id"))
