@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: target-group
+
+name: tg1
+
+description: 
+
+conditions:
+  allOf:
+    - property:
+        name: rox.app_release
+        operator: semver-eq
+        operands:
+            - 1.2.3
