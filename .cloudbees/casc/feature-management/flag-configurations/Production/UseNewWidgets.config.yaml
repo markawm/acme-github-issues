@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: flag-configuration
+
+flag: UseNewWidgets
+
+enabled: true
+
+defaultValue: true
+
+conditions:
+  []

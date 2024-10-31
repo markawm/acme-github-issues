@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: flag-properties
+
+name: internal.api_version
+type: Semver
+description: ""

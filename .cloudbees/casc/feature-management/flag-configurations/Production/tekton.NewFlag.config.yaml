@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: flag-configuration
+
+flag: tekton.NewFlag
+
+enabled: true
+
+defaultValue: ccc
+
+conditions:
+  []

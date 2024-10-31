@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: flag
+
+flag: enableTutorial
+flagType: boolean
+description: 
+labels:
+
+availableValues:
+
+isPermanent: false

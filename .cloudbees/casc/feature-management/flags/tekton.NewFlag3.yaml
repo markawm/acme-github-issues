@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: flag
+
+flag: tekton.NewFlag3
+flagType: boolean
+description: 
+labels:
+
+availableValues:
+
+isPermanent: false

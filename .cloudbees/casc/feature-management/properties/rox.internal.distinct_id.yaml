@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: flag-properties
+
+name: rox.internal.distinct_id
+type: String
+description: ""

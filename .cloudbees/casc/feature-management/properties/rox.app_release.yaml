@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: flag-properties
+
+name: rox.app_release
+type: Semver
+description: ""

@@ -1,0 +1,7 @@
+---
+apiVersion: v1
+kind: flag-properties
+
+name: rox.internal.customPlatform
+type: String
+description: ""
